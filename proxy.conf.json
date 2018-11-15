@@ -1,0 +1,7 @@
+{
+  "/api": {
+    "target": "https://serene-forest-85695.herokuapp.com",
+    "secure": false,
+    "logLevel": "debug"
+  }
+}
