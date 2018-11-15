@@ -1,0 +1,5 @@
+<mat-radio-group [(ngModel)]="value">
+  <mat-radio-button *ngFor="let oneValue of values" [value]="oneValue">
+    {{oneValue}}
+  </mat-radio-button>
+</mat-radio-group>

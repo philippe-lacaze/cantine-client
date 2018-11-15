@@ -1,0 +1,14 @@
+<mat-card class="preparer-commande">
+  <mat-card-header>
+    <i mat-card-avatar class="material-icons md-36">assignment</i>
+    <mat-card-title-group>
+      <mat-card-title>Administration</mat-card-title>
+    </mat-card-title-group>
+  </mat-card-header>
+
+  <mat-card class="configs" *ngFor="let config of configs">
+    <mat-card-content>
+      {{ config | json}}
+    </mat-card-content>
+  </mat-card>
+</mat-card>

@@ -1,0 +1,128 @@
+<form #f="ngForm">
+  <mat-card>
+    <mat-card-header>
+      <i mat-card-avatar class="material-icons md-36">assignment</i>
+      <mat-card-title-group *ngIf="commande && !commande.traitee">
+        <mat-card-title>{{newCommande ? 'Créer' : 'Vous pouvez encore modifier'}} votre commande</mat-card-title>
+        <mat-card-subtitle>Sélectionner les ingrédients étape par étape</mat-card-subtitle>
+      </mat-card-title-group>
+      <mat-card-title-group *ngIf="commande && commande.traitee">
+        <mat-card-title>Vous ne pouvez plus modifier votre commande, désolé</mat-card-title>
+      </mat-card-title-group>
+    </mat-card-header>
+    <mat-card-content>
+
+      <mat-vertical-stepper *ngIf="commande && !commande.traitee" #stepper>
+        <mat-step>
+          <ng-template matStepLabel>Je choisis le menu {{commande.menu}}</ng-template>
+          <app-choix-simple class="choix-menu" [values]="listeMenus" [(ngModel)]="commande.menu" required
+                            #ngMenu="ngModel"
+                            name="menu" (ngModelChange)="onChangeMenu($event); stepper.next()"></app-choix-simple>
+          <mat-error *ngIf="hasError(ngMenu)">Champ requis</mat-error>
+        </mat-step>
+
+        <ng-template [ngIf]="commande && commande.menu && listePlats && listePlats.length > 1">
+          <mat-step>
+            <ng-template matStepLabel>Je choisis comme plat {{commande.plat}}</ng-template>
+            <app-choix-simple [values]="listePlats" [(ngModel)]="commande.plat" name="plat" required
+                              #ngPlat="ngModel"
+                              (ngModelChange)="onChangePlat(); stepper.next()" #plat></app-choix-simple>
+            <mat-error *ngIf="hasError(ngPlat)">Champ requis</mat-error>
+          </mat-step>
+        </ng-template>
+
+        <ng-template [ngIf]="commande.plat && plusieurPains">
+          <mat-step [stepControl]="f.control.pain">
+            <ng-template matStepLabel>Je choisis comme pain {{commande.pain}}</ng-template>
+            <app-choix-simple [values]="listePains" [(ngModel)]="commande.pain" name="pain" required
+                              #ngPain="ngModel"
+                              (ngModelChange)="stepper.next()">
+            </app-choix-simple>
+            <mat-error *ngIf="hasError(ngPain)">Champ requis</mat-error>
+          </mat-step>
+        </ng-template>
+
+        <ng-template [ngIf]="commande.plat && listeIngredients">
+          <mat-step>
+            <ng-template matStepLabel>Je choisis comme ingrédient principal {{commande.ingredient}}</ng-template>
+            <app-choix-simple [values]="listeIngredients" [(ngModel)]="commande.ingredient" name="ingredient"
+                              required #ngIng="ngModel"
+                              (ngModelChange)="stepper.next()"></app-choix-simple>
+          </mat-step>
+          <mat-error *ngIf="hasError(ngIng)">Champ requis</mat-error>
+        </ng-template>
+
+        <ng-template [ngIf]="commande.plat && listeAccompagenents">
+          <mat-step>
+            <ng-template matStepLabel>Je choisis comme accompagnements {{commande.accompagnements.join(', ')}}
+            </ng-template>
+            <app-choix-multiple [values]="listeAccompagenents" [(ngModel)]="commande.accompagnements"
+                                (ngModelChange)="onAccompagnementChange()" name="accompagnements"
+            ></app-choix-multiple>
+          </mat-step>
+        </ng-template>
+
+        <ng-template [ngIf]="commande.plat && listeDesserts && listeDesserts.length > 0">
+          <mat-step>
+            <ng-template matStepLabel>Je choisis comme dessert {{commande.dessert}}</ng-template>
+            <app-choix-simple [values]="listeDesserts" [(ngModel)]="commande.dessert" name="dessert"
+                              (ngModelChange)="stepper.next()"></app-choix-simple>
+          </mat-step>
+        </ng-template>
+
+        <ng-template [ngIf]="commande.plat && listeComplements && listeComplements.length > 0">
+          <mat-step>
+            <ng-template matStepLabel>Je choisis comme complément {{commande.complement}}</ng-template>
+            <app-choix-simple [values]="listeComplements" [(ngModel)]="commande.complement" name="complement"
+                              (ngModelChange)="stepper.next()"></app-choix-simple>
+          </mat-step>
+        </ng-template>
+
+        <ng-template [ngIf]="commande.plat && listeBoissons && listeBoissons.length > 0">
+          <mat-step>
+            <ng-template matStepLabel>Je choisis comme boisson {{commande.boisson}}</ng-template>
+            <app-choix-simple [values]="listeBoissons" [(ngModel)]="commande.boisson" name="boisson"
+                              (ngModelChange)="stepper.next()"></app-choix-simple>
+          </mat-step>
+        </ng-template>
+
+        <mat-step>
+          <ng-template matStepLabel>Terminé</ng-template>
+        </mat-step>
+      </mat-vertical-stepper>
+
+    </mat-card-content>
+  </mat-card>
+
+  <mat-divider><br></mat-divider>
+
+  <mat-card *ngIf="commande">
+    <mat-card-header>
+      <i mat-card-avatar class="material-icons md-36">send</i>
+      <mat-card-title-group>
+        <mat-card-title>{{getTitleCommander()}}
+        </mat-card-title>
+        <mat-card-subtitle>
+          <label *ngIf="commande?.menu">Status: <span>{{ getStatus()}}</span></label>
+        </mat-card-subtitle>
+      </mat-card-title-group>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-form-field>
+        <input name="nomPrenom" matInput placeholder="Prenom Nom" [(ngModel)]="commande.client" required
+               (change)="onChangeClientOrDate()" #ngNomPrenom>
+        <mat-error>Champ réquis pour passer commande</mat-error>
+      </mat-form-field>&nbsp;
+      <mat-form-field>
+        <input name="dateCommande" matInput placeholder="Date commande" [(ngModel)]="commande.dateCommande"
+               (change)="onChangeClientOrDate()">
+        <mat-error>Champ réquis pour passer commande</mat-error>
+      </mat-form-field>
+
+    </mat-card-content>
+    <mat-card-content *ngIf="commande && commande.menu && !commande.traitee">
+      <app-commande [commande]="commande"></app-commande>
+      <button  class="commander" mat-raised-button mat-button color="primary" (click)="onCommander()">Commander</button>
+    </mat-card-content>
+  </mat-card>
+</form>

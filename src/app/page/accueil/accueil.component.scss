@@ -1,0 +1,42 @@
+
+.mat-grid-tile {
+  background-size: cover;
+}
+
+.preparer {
+  background-image: url('../../../assets/preparer.jpg');
+  .mat-grid-tile figure {
+    align-items: flex-start !important;
+  }
+  p {
+    position: relative;
+    top: -40%;
+    color: red;
+  }
+
+
+}
+
+.commander  {
+  background-image: url('../../../assets/menu.jpg');
+  .mat-grid-tile figure {
+    align-items: flex-start !important;
+  }
+  p {
+    position: relative;
+    top: -40%;
+    color: red;
+  }
+
+}
+
+.admin {
+  color: red;
+  background-color: rgba(252,236,252,1);
+  //background-image: url('../../../assets/admin.jpg');
+  //background-size: 100% 100%;
+}
+
+
+
+

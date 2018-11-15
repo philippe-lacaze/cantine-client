@@ -1,0 +1,7 @@
+<article>
+  <p class="principal">Pour {{commande.client}}, menu {{commande.menu}} : {{commande.plat}} {{commande.pain}} avec {{commande.ingredient}}</p>
+  <p *ngIf="commande.accompagnements && commande.accompagnements.length > 0" class="accompagnement">Accompagnement : {{commande.accompagnements.join(', ')}}</p>
+  <p class="autre">
+    <span>{{commande.dessert}}</span> <span>{{commande.complement}}</span> <span>{{commande.boisson}}</span>
+  </p>
+</article>

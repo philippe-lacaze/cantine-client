@@ -1,0 +1,18 @@
+<mat-card class="preparer-commande">
+  <mat-card-header>
+    <i mat-card-avatar class="material-icons md-36">assignment</i>
+    <mat-card-title-group>
+      <mat-card-title>Commandes</mat-card-title>
+    </mat-card-title-group>
+  </mat-card-header>
+
+  <mat-card class="commande" *ngFor="let commande of commandes"> <!--matBadge="!" matBadgePosition="after above">-->
+    <mat-card-content>
+      <app-commande-apreparer class="commande-content" [commande]="commande"></app-commande-apreparer>
+      <mat-slide-toggle class="action"
+                        [checked]="commande.traitee"
+                        (change)="onChange($event,commande)"
+      >OK</mat-slide-toggle>
+    </mat-card-content>
+  </mat-card>
+</mat-card>
