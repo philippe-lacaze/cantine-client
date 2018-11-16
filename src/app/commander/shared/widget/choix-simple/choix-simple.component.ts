@@ -1,6 +1,6 @@
 import {Component, ElementRef, forwardRef, Input, OnInit} from '@angular/core';
-import { FocusgroupAccessorBase} from 'zia-composants';
 import {NG_VALUE_ACCESSOR} from '@angular/forms';
+import {FocusgroupAccessorBase} from 'src/app/shared/widget/focusgroup-accessor-base';
 
 @Component({
   selector: 'app-choix-simple',
