@@ -40,9 +40,9 @@ export class CommandeModel implements Commande {
   }
 
   display() {
-    return `${CommandeModel.withThat('', this.client, ` commande dans le `)} ` +
-      `${CommandeModel.withThat('menu ', this.menu)}, ` +
-      `${CommandeModel.withThat('', this.plat)} ` +
+    return `${CommandeModel.withThat('', this.client, ` commande dans le`)} ` +
+      `${CommandeModel.withThat('menu ', this.menu)} ` +
+      `${CommandeModel.withThat(', ', this.plat)} ` +
       `${CommandeModel.withThat('', this.pain)} ` +
       `${CommandeModel.withThat('avec ', this.ingredient)} ` +
       `${CommandeModel.withThat('garni de ', this.accompagnements ? this.accompagnements.join(', ') : '')}` +

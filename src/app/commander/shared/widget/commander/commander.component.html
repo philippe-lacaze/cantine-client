@@ -107,6 +107,11 @@
         </mat-card-subtitle>
       </mat-card-title-group>
     </mat-card-header>
+
+    <mat-card-content>
+      <app-commande [commande]="commande"></app-commande>
+    </mat-card-content>
+
     <mat-card-content>
       <mat-form-field>
         <input name="nomPrenom" matInput placeholder="Prenom Nom" [(ngModel)]="commande.client" required
@@ -118,11 +123,11 @@
                (change)="onChangeClientOrDate()">
         <mat-error>Champ réquis pour passer commande</mat-error>
       </mat-form-field>
+    </mat-card-content>
 
+    <mat-card-content>
+      <button *ngIf="commande && commande.menu && !commande.traitee" class="commander" mat-raised-button mat-button color="primary" (click)="onCommander()">Commander</button>
     </mat-card-content>
-    <mat-card-content *ngIf="commande && commande.menu && !commande.traitee">
-      <app-commande [commande]="commande"></app-commande>
-      <button  class="commander" mat-raised-button mat-button color="primary" (click)="onCommander()">Commander</button>
-    </mat-card-content>
+
   </mat-card>
 </form>
