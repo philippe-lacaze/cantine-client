@@ -1,0 +1,126 @@
+header.bon-appetit {
+  background-color: lightgray;
+  color: white;
+  vertical-align: top;
+  h1 {
+    padding: 5px;
+    margin-left: 4rem;
+    width: 60%;
+  }
+  span {
+    background-color: white;
+    color: black;
+  }
+  h1, span {
+    display: inline-block;
+  }
+}
+
+h2, .subtitle {
+  text-align: center;
+}
+
+.subtitle {
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.nom-telephone {
+  margin: 1rem 0;
+  display: flex;
+  justify-content: space-between;
+  font-size: large;
+
+  span:first-child {
+    margin-left: 1rem;
+  }
+
+  span:last-child {
+    margin-right: 5rem;
+  }
+}
+
+article {
+  margin: 1rem 0;
+  header {
+    margin: 0.25rem 0;
+  }
+}
+
+section {
+  margin: 0.5rem 0;
+  padding-left: 2px;
+}
+
+.pain, .garniture, .condiments {
+  vertical-align: top;
+  display: inline-block;
+  width: 33%;
+  label {
+    display: block;
+  }
+}
+
+.menu-multi-plat {
+
+  margin-bottom: 1rem;
+
+  .plat {
+    border-left: 1px solid black;
+    vertical-align: top;
+    display: table-cell;
+    width: 33%;
+
+    label {
+      display: block;
+    }
+
+    &.un.sandwich {
+      vertical-align: top;
+      .plat-pain {
+        display: inline-block;
+        width: 100%;
+      }
+      .plat-garniture, .plat-condiments {
+        vertical-align: top;
+        display: inline-block;
+        width: 49%;
+      }
+
+    }
+  }
+}
+
+.dessert, .complement, .boisson {
+  margin-top: 1rem;
+  vertical-align: top;
+  display: inline-block;
+  width: 33%;
+  label {
+    display: block;
+  }
+}
+
+article > section > label:first-child {
+  font-size: x-large;
+}
+
+.little {
+  font-size: xx-small;
+  margin: 1px;
+}
+
+.prix {
+  float: right;
+}
+
+.plat-du-jour-info {
+  display: block;
+  width: 50%;
+  margin: 2rem auto;
+  padding: 5px;
+  border: 1px solid black;
+  border-radius: 10px;
+  font-size: small;
+  text-align: center;
+}

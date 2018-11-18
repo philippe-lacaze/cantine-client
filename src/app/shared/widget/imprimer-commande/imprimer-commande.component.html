@@ -1,0 +1,128 @@
+<div class="imprimer">
+  <header class="bon-appetit">
+    <h1>Bon appétit !</h1>
+    <span class="date">Date: {{commande.dateCommande}}</span>
+  </header>
+  <h2>Bulletin de commande de votre pique-nique</h2>
+  <p class="subtitle">A déposer avant 10h dans le bac situé à l'entrée de l'Orée du Clos et à recupérer entre 11h45 et
+    13h30 à l'Orée du clos</p>
+
+  <section class="nom-telephone">
+    <span>Mon nom : {{commande.client}}</span>
+    <span>Mon numéro de téléphone : </span>
+  </section>
+
+  <article *ngFor="let menu of listeMenuConfig">
+
+    <section>
+      <label>
+        <input type="checkbox" [checked]="commande.menu == menu.id"/>
+        Je choisi un {{menu.id}}<span class="prix">${{menu.prix}}</span>
+      </label>
+    </section>
+
+    <div class="menu-mono-plat" *ngIf="menu.plats.length === 1 ">
+
+      <section class="pain">
+        <header>Je choisis mon pain
+          <p class="little">(1 seul choix possible)</p></header>
+        <label *ngFor="let pain of menu.plats[0].pain">
+          <input type="checkbox" [checked]="commande.menu === 'sandwich' && commande.pain == pain"/>
+          {{pain}}
+        </label>
+      </section>
+
+      <section class="garniture">
+        <header>Je choisis ma garniture
+          <p class="little">(1 seul choix possible)</p></header>
+        <label *ngFor="let ingredient of menu.plats[0].ingredient">
+          <input type="checkbox" [checked]="commande.menu === 'sandwich'  && commande.ingredient == ingredient"/>
+          {{ingredient}}
+        </label>
+      </section>
+
+      <section class="condiments">
+        <header>Je choisis mes condiments
+          <p class="little">(plusieurs choix possible)</p></header>
+        <label *ngFor="let acc of menu.plats[0].accompagnements">
+          <input type="radio" [checked]="commande.menu === 'sandwich'  && commande.accompagnements.indexOf(acc)>-1"/>
+          {{acc}}
+        </label>
+      </section>
+
+    </div>
+
+    <div class="menu-multi-plat" *ngIf="menu.plats.length > 1 ">
+      <section *ngFor="let plat of menu.plats" class="plat {{plat.nom}}">
+        <label>
+          <input type="checkbox" [checked]="commande.menu === menu.id && commande.plat === plat.nom"/>
+          Je choisis {{plat.nom}}
+        </label>
+
+        <section *ngIf="plat.nom === 'un plat du jour'" class="plat-du-jour-info">
+          Le plat et le dessert du jour, s'ils sont transportables, sont affichés le matin sur la porte du restaurant.
+        </section>
+
+        <section class="plat-pain" *ngIf="plat.pain && plat.pain.length > 0">
+          <header>Je choisis mon pain
+            <p class="little">(1 seul choix possible)</p></header>
+          <label *ngFor="let pain of plat.pain">
+            <input type="checkbox"
+                   [checked]="commande.menu === menu.id && commande.plat === plat.nom && commande.pain == pain"/>
+            {{pain}}
+          </label>
+        </section>
+
+        <section class="plat-garniture" *ngIf="plat.ingredient && plat.ingredient.length > 0">
+          <header>Je choisis ma garniture
+            <p class="little">(1 seul choix possible)</p></header>
+          <label *ngFor="let ingredient of plat.ingredient">
+            <input type="checkbox"
+                   [checked]="commande.menu === menu.id && commande.plat === plat.nom && commande.ingredient == ingredient"/>
+            {{ingredient}}
+          </label>
+        </section>
+
+        <section class="plat-condiments" *ngIf="plat.accompagnements && plat.accompagnements.length > 0">
+          <header>Je choisis mes condiments
+            <p class="little">(plusieurs choix possible)</p></header>
+          <label *ngFor="let acc of plat.accompagnements">
+            <input type="radio"
+                   [checked]="commande.menu === menu.id && commande.plat === plat.nom && commande.accompagnements.indexOf(acc)>-1"/>
+            {{acc}}
+          </label>
+        </section>
+
+      </section>
+
+      <section class="dessert" *ngIf="menu.plats[1].dessert && menu.plats[1].dessert.length > 0">
+        <header>Je choisis mon dessert
+          <p class="little">(1 seul choix possible)</p></header>
+        <label *ngFor="let dessert of menu.plats[1].dessert">
+          <input type="checkbox" [checked]="commande.menu === menu.id && commande.dessert == dessert"/>
+          {{dessert}}
+        </label>
+      </section>
+
+      <section class="complement" *ngIf="menu.plats[1].complement && menu.plats[1].complement.length > 0">
+        <header>Je choisis mon complement
+          <p class="little">(1 seul choix possible)</p></header>
+        <label *ngFor="let complement of menu.plats[1].complement">
+          <input type="checkbox" [checked]="commande.menu === menu.id && commande.complement == complement"/>
+          {{complement}}
+        </label>
+      </section>
+
+      <section class="boisson" *ngIf="menu.plats[1].boisson && menu.plats[1].boisson.length > 0">
+        <header>Je choisis ma boisson
+          <p class="little">(1 seul choix possible)</p></header>
+        <label *ngFor="let boisson of menu.plats[1].boisson">
+          <input type="checkbox" [checked]="commande.menu === menu.id && commande.boisson == boisson"/>
+          {{boisson}}
+        </label>
+      </section>
+
+    </div>
+
+  </article>
+</div>
