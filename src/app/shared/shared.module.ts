@@ -14,6 +14,7 @@ import {
 import {MatIconModule} from '@angular/material/icon';
 import {CommandeComponent} from './widget/commande/commande.component';
 import { MatMomentDateModule, MAT_MOMENT_DATE_FORMATS } from '@angular/material-moment-adapter';
+import {ImprimerCommandeComponent} from './widget/imprimer-commande/imprimer-commande.component';
 
 const importExport = [
   CommonModule,
@@ -39,9 +40,12 @@ const importExport = [
   MatBadgeModule
 ]
 
+/**
+ * Module partagé utilisé par tous les features modules routés.
+ */
 @NgModule({
-  declarations: [CommandeComponent],
+  declarations: [CommandeComponent, ImprimerCommandeComponent],
   imports: importExport,
-  exports: [...importExport, CommandeComponent]
+  exports: [...importExport, CommandeComponent, ImprimerCommandeComponent]
 })
 export class SharedModule { }

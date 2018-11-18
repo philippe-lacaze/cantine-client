@@ -1,16 +1,16 @@
-import {Component, Input, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
+import {Component, Inject, Input, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import {MenusConfigModel, PlatConfigModel} from '../../../../shared/model/menu-config-model';
 import {CommandeModel} from '../../../../shared/model/commande-model';
 import {CommandeService} from '../../../../shared/service/commande.service';
 import {MatSnackBar, MatSnackBarConfig, MatStepper} from '@angular/material';
-import {resetComponentState} from '@angular/core/src/render3/instructions';
 import {AbstractControl, NgForm} from '@angular/forms';
-import {isCombinedModifierFlagSet} from 'tslint';
+import {WINDOW} from '../../../page/accueil-commander/accueil-commander.component';
 
 @Component({
   selector: 'app-commander',
   templateUrl: './commander.component.html',
   styleUrls: ['./commander.component.scss'],
+  providers: [{provide: WINDOW, useValue: window}],
   encapsulation: ViewEncapsulation.None
 })
 export class CommanderComponent implements OnInit {
@@ -62,7 +62,8 @@ export class CommanderComponent implements OnInit {
   listeBoissons: string[];
 
   constructor(private commandeService: CommandeService,
-              private snackBar: MatSnackBar) {
+              private snackBar: MatSnackBar,
+              @Inject(WINDOW) public window: Window) {
     this.newCommande = true;
   }
 

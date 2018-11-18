@@ -2,6 +2,9 @@ import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from '@angular/rou
 import {AbstractDao} from './abstract-dao';
 import {Observable} from 'rxjs/index';
 
+/**
+ * Classe abstraite d'un resolver basé sur un AbstractDao.
+ */
 export abstract class AbstractResolver<T> implements Resolve<T[]> {
 
   constructor(protected dao: AbstractDao<T>) { }

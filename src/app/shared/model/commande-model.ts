@@ -1,3 +1,6 @@
+/**
+ * Interface représentant les données d'une commande.
+ */
 export interface Commande {
   id?: string;
   client?: string;
@@ -14,6 +17,9 @@ export interface Commande {
   traitee: boolean;
 }
 
+/**
+ * Entité commande.
+ */
 export class CommandeModel implements Commande {
   id: string;
   client: string;

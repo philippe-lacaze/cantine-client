@@ -1,7 +1,9 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {CommandeModel} from '../../model/commande-model';
 
-
+/**
+ * Dumb component affichant sous forme de texte le contenu d'une commande.
+ */
 @Component({
   selector: 'app-commande',
   templateUrl: './commande.component.html',

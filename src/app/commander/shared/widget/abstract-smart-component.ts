@@ -1,5 +1,9 @@
 import {ActivatedRoute, ActivatedRouteSnapshot} from '@angular/router';
 
+/**
+ * Classe abstraite d'un smart composant récupérant des données nécessaire dans la route (chargée par
+ * resolver).
+ */
 export abstract class AbstractSmartEntityComponent<T> {
 
   entity: T;

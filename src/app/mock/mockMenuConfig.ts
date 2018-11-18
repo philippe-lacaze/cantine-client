@@ -3,6 +3,7 @@ import {MenusConfigModel} from '../shared/model/menu-config-model';
 export const menuconfig: MenusConfigModel[] = [
   {
     id: 'sandwich',
+    prix: '2,97 €',
     plats: [
       {
         nom: 'un sandwich',
@@ -18,6 +19,7 @@ export const menuconfig: MenusConfigModel[] = [
   },
   {
     id: 'pique-nique',
+    prix: '6,00 €',
     plats: [
       {
         nom: 'un sandwich',

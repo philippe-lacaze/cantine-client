@@ -2,6 +2,9 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs/index';
 import {tap} from 'rxjs/internal/operators';
 
+/**
+ * Classe abstraite d'un dao CRUD pour une donnée de type T donné.
+ */
 export class AbstractDao<T> {
 
   protected base = '/api';
@@ -10,6 +13,11 @@ export class AbstractDao<T> {
   constructor(protected httpClient: HttpClient) {
   }
 
+  /**
+   * Retourne un Observable sur l'entité d'id donné.
+   * @param {string} id
+   * @returns {Observable<T>}
+   */
   read(id: string): Observable<T> {
     return this.httpClient.get<T>(this.base + this.url + '/' + id)
       .pipe(tap(
@@ -18,6 +26,10 @@ export class AbstractDao<T> {
       ));
   }
 
+  /**
+   * Retoure un Observable sur la collection d'entité.
+   * @returns {Observable<T[]>}
+   */
   fetch(): Observable<T[]> {
     return this.httpClient.get<T[]>(this.base + this.url)
       .pipe(tap(
@@ -26,6 +38,11 @@ export class AbstractDao<T> {
     ));
   }
 
+  /**
+   * Crée l'entité donnée et retourne un Observable dessus.
+   * @param {T} entity
+   * @returns {Observable<T>}
+   */
   create(entity: T): Observable<T> {
     return this.httpClient.post<T>(this.base + this.url, entity)
       .pipe(tap(
@@ -34,6 +51,11 @@ export class AbstractDao<T> {
       ));
   }
 
+  /**
+   * Maj l'entité donné et retourne un Observable dessus.
+   * @param {T} entity
+   * @returns {Observable<T>}
+   */
   update(entity: T): Observable<T> {
     return this.httpClient.put<T>(this.base + this.url, entity)
       .pipe(tap(
@@ -42,6 +64,11 @@ export class AbstractDao<T> {
       ));
   }
 
+  /**
+   * Supprime l'entité donnée.
+   * @param {T} entity
+   * @returns {Observable<T>}
+   */
   delete(entity: T): Observable<T> {
     return this.httpClient.delete<T>(this.base + this.url + '/' + entity['id'])
       .pipe(tap(
