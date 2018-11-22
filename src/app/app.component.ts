@@ -3,6 +3,7 @@ import {Observable} from 'rxjs/index';
 import {CommandeModel} from './shared/model/commande-model';
 import {tap} from 'rxjs/internal/operators';
 import {ApplicationService} from './shared/service/application.service';
+import {PwaService} from './shared/service/pwa.service';
 
 @Component({
   selector: 'app-root',
@@ -14,8 +15,8 @@ export class AppComponent implements OnInit {
   commandes: any[] = [];
 
   constructor(private changeDetector: ChangeDetectorRef,
-              public application: ApplicationService) {
-
+              public application: ApplicationService,
+              public pwa: PwaService) {
   }
 
   ngOnInit(): void {
@@ -43,5 +44,9 @@ export class AppComponent implements OnInit {
         this.changeDetector.detectChanges();
       },
       error => console.log('error ', error))).subscribe();
+  }
+
+  installPwa() {
+    this.pwa.promptEvent.prompt();
   }
 }

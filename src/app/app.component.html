@@ -6,3 +6,8 @@
   </mat-card>
 </header>
 <router-outlet></router-outlet>
+
+
+<mat-card-content *ngIf="pwa.promptEvent" class="boutons install">
+  <button  mat-raised-button mat-button color="accent" (click)="installPwa()">Installer l'app sur votre device !</button>
+</mat-card-content>

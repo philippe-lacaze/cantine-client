@@ -9,11 +9,6 @@ const routes: Routes = [
 
     children: [
       {
-        path: '',
-        redirectTo: '/accueil',
-        pathMatch: 'full'
-      },
-      {
         path: 'accueil',
         component: AccueilComponent,
       },
@@ -28,13 +23,22 @@ const routes: Routes = [
       {
         path: 'admin',
         loadChildren: './administrer/administrer.module#AdministrerModule'
+      },
+      {
+        path: '',
+        redirectTo: '/accueil',
+        pathMatch: 'full'
       }
+
     ]
   }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {
+    enableTracing: false,
+    useHash: true
+  })],
   exports: [RouterModule]
 })
 export class AppRoutingModule {

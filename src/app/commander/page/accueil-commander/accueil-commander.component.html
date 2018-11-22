@@ -4,15 +4,5 @@
 <app-imprimer-commande *ngIf="isPrintingMode && commande" [commande]="commande"
                        [listeMenuConfig]="listeMenuConfig"></app-imprimer-commande>
 
-<script>
-
-  var mediaQueryList = window.matchMedia('print');
-  mediaQueryList.addListener(function (mql) {
-    if (mql.matches) {
-      console.log('webkit equivalent of onbeforeprint');
-    }
-  });
-
-</script>
 
 
